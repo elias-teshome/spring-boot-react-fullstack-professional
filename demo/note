@@ -1,0 +1,43 @@
+to run the jar file
+Java -jar name of jar file 
+
+Mac
+- ./mvnw jib:dockerBuild -Djib.to.image=fullstack:v1
+- ./mvnw clean install jib:dockerBuild -Djib.to.image=fullstack:v1
+
+Windows
+- mvnw jib:dockerBuild -Djib.to.image=fullstack:v1
+- mvnw clean install jib:dockerBuild -Djib.to.image=fullstack:v1
+
+To run container
+- docker run --name fullstack -p 8080:8080 fullstack:v1
+-docker run -p 8080:8080 name:tag
+
+To delete container with name fullstack
+- docker rm -f fullstack 
+
+To show all the container 
+-docker ps -a
+
+To view local images run
+- docker image ls
+
+To view running containers
+- docker ps 
+
+Commands used: 
+
+To delete local Image
+-docker image rm eliasgirma/student-information-system:v1
+
+./mvnw clean install -P build-frontend -P jib-push-to-dockerhub -Dapp.image.tag=2
+
+./mvnw clean install -P build-frontend -P jib-push-to-local -Dapp.image.tag=latest
+
+To create a network 
+-docker network create db
+
+To delelte the network
+-docker network rm db(name of network)
+
+
