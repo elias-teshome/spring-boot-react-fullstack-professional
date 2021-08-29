@@ -1,7 +1,7 @@
 import {useState,useEffect} from "react";
 import {getAllStudents} from "./client";
 import StudentDrawerForm from "./StudentDrawerForm";
-import {Layout, Menu, Breadcrumb, Table, Spin, Empty, Button} from 'antd';
+import {Layout, Menu, Breadcrumb, Table, Spin, Empty, Button, Badge, Tag} from 'antd';
 import {
     DesktopOutlined,
     PieChartOutlined,
@@ -85,11 +85,26 @@ function App() {
            <Table dataSource={Students}
                       columns={columns}
                       bordered
-                      title={() => <Button
+                      title={() =>
+                          <>
+
+                          <Tag style={{marginLeft:"10px"}}>Number of students</Tag>
+                          <Badge
+                              className="site-badge-count-4"
+                              count={Students.length}
+
+                          />
+                          <br/><br/>
+                          <Button
                           onClick={()=>setShowDrawer(!showDrawer)}
                           type="primary" shape="round" icon={<PlusOutlined/>} size={size}>
                           Add Student
-                      </Button>}
+                         </Button>
+
+
+                          </>
+
+                      }
                       pagination={{ pageSize: 50 }}
                       scroll={{ y: 500 }}
                       rowKey={(student=>student.id)}/>
