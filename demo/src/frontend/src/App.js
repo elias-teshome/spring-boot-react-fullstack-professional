@@ -1,5 +1,6 @@
 import {useState,useEffect} from "react";
 import {getAllStudents} from "./client";
+import StudentDrawerForm from "./StudentDrawerForm";
 import {Layout, Menu, Breadcrumb, Table, Spin, Empty, Button} from 'antd';
 import {
     DesktopOutlined,
@@ -20,6 +21,7 @@ function App() {
     const [collapsed,setCollapsed]=useState(false);
     const [fetching,setFetching]=useState(true);
     const {size}=useState('small');
+    const [showDrawer, setShowDrawer] = useState(false);
 
 
     const columns = [
@@ -72,15 +74,25 @@ function App() {
         {
             return <Empty/>;
         }
-        return <Table dataSource={Students}
+        return <>
+
+            <StudentDrawerForm
+                showDrawer={showDrawer}
+                setShowDrawer={setShowDrawer}
+            />
+
+           <Table dataSource={Students}
                       columns={columns}
                       bordered
-                      title={() => <Button type="primary" shape="round" icon={<PlusOutlined/>} size={size}>
+                      title={() => <Button
+                          onClick={()=>setShowDrawer(!showDrawer)}
+                          type="primary" shape="round" icon={<PlusOutlined/>} size={size}>
                           Add Student
                       </Button>}
                       pagination={{ pageSize: 50 }}
                       scroll={{ y: 500 }}
-                      rowKey={(student=>student.id)}/>;
+                      rowKey={(student=>student.id)}/>
+            </>
   }
     return (
         <Layout style={{ minHeight: '100vh' }}>
