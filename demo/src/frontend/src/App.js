@@ -1,12 +1,12 @@
 import {useState,useEffect} from "react";
 import {getAllStudents} from "./client";
-import {Layout, Menu, Breadcrumb, Table, Spin, Empty} from 'antd';
+import {Layout, Menu, Breadcrumb, Table, Spin, Empty, Button} from 'antd';
 import {
     DesktopOutlined,
     PieChartOutlined,
     FileOutlined,
     TeamOutlined,
-    UserOutlined, LoadingOutlined,
+    UserOutlined, LoadingOutlined, DownloadOutlined, PlusOutlined,
 } from '@ant-design/icons';
 
 import './App.css';
@@ -19,6 +19,8 @@ function App() {
     const [Students,setStudents]=useState([]);
     const [collapsed,setCollapsed]=useState(false);
     const [fetching,setFetching]=useState(true);
+    const {size}=useState('small');
+
 
     const columns = [
         {
@@ -73,7 +75,9 @@ function App() {
         return <Table dataSource={Students}
                       columns={columns}
                       bordered
-                      title={() => 'Students'}
+                      title={() => <Button type="primary" shape="round" icon={<PlusOutlined/>} size={size}>
+                          Add Student
+                      </Button>}
                       pagination={{ pageSize: 50 }}
                       scroll={{ y: 500 }}
                       rowKey={(student=>student.id)}/>;
