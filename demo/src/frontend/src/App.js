@@ -1,7 +1,7 @@
 import {useState,useEffect} from "react";
 import {getAllStudents} from "./client";
 import StudentDrawerForm from "./StudentDrawerForm";
-import {Layout, Menu, Breadcrumb, Table, Spin, Empty, Button, Badge, Tag} from 'antd';
+import {Layout, Menu, Breadcrumb, Table,Spin,Avatar, Empty, Button, Badge, Tag} from 'antd';
 import {
     DesktopOutlined,
     PieChartOutlined,
@@ -12,8 +12,11 @@ import {
 
 import './App.css';
 
+
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+
+
 
 function App() {
 
@@ -23,8 +26,30 @@ function App() {
     const {size}=useState('small');
     const [showDrawer, setShowDrawer] = useState(false);
 
+    const Theavatar=  ({name}) =>{
 
+        let trim = name.trim();
+        if(trim.length===0)
+        {
+         return <Avatar icon ={<UserOutlined/>}/>
+        }
+        if(trim.split(" ").length===1)
+        {
+            return <Avatar>{name.charAt(0)}</Avatar>
+        }
+        return <Avatar>
+            {`${name.charAt(0)}${name.charAt(name.length-1)}`}</Avatar>
+    }
     const columns = [
+        {
+          title: '',
+          dataIndex: 'avatar',
+          key: 'avatar',
+          render: (text,student)=>
+             <Theavatar name={student.name}/>
+
+
+        },
         {
             title: 'Id',
             dataIndex: 'id',
