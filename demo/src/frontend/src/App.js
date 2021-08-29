@@ -7,7 +7,7 @@ import {
     PieChartOutlined,
     FileOutlined,
     TeamOutlined,
-    UserOutlined, LoadingOutlined, DownloadOutlined, PlusOutlined,
+    UserOutlined, LoadingOutlined, PlusOutlined,
 } from '@ant-design/icons';
 
 import './App.css';
