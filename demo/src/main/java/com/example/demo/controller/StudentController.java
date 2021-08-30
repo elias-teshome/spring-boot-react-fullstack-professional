@@ -29,4 +29,19 @@ public class StudentController {
     {
       studentServices.save(student);
     }
+    @DeleteMapping(path = "{id}")
+    public void deletStudent(@PathVariable Long id)
+    {
+      studentServices.deleteStudent(id);
+    }
+
+  //put
+  @PutMapping(path = "{id}")
+  public void updateProduct( @PathVariable Long id, @RequestBody Student student)//the Request body means the jSON parse in to product object
+  {
+    studentServices.updateStudent(id,student);
+
+  }
+
+
 }
