@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 
 import './App.css';
-import {successNotification} from "./Notification";
+import {errorNotification, successNotification} from "./Notification";
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -49,6 +49,13 @@ function App() {
             callback();
         });
     }
+
+    // const editStudent=(studentId,callback)=>{
+    //     editStudents(studentId).then(()=>{
+    //         successNotification( "Student edited", `Student with ${studentId} was edited`);
+    //         callback();
+    //     })
+    // }
     const columns = fetchStudents=>[
         {
           title: '',
@@ -92,7 +99,9 @@ function App() {
                         cancelText='No'>
                         <Radio.Button value="small">Delete</Radio.Button>
                     </Popconfirm>
-                    <Radio.Button value="small">Edit</Radio.Button>
+
+                        <Radio.Button value="small" onClick={()=>setShowDrawer(!showDrawer)}>Edit</Radio.Button>
+
                 </Radio.Group>
 
 
@@ -110,7 +119,14 @@ function App() {
             console.log(data);
             setStudents(data)
             setFetching(false)
-        });
+        }).catch(err=>{
+            console.log(err.response);
+            err.response.json().then(res=>{
+                console.log(res);
+                errorNotification("there was an issue"
+                , `${res.message} ${res.status} ${res.error}`)
+            })
+        }).finally(()=>setFetching(false))
     }
 
     useEffect(()=>{
@@ -125,7 +141,23 @@ function App() {
         }
         if(Students.length<=0)
         {
-            return <Empty/>;
+
+            return <>
+                <Button
+                    onClick={()=>setShowDrawer(!showDrawer)}
+                    type="primary" shape="round" icon={<PlusOutlined/>} size={size}>
+                    Add Student
+                </Button>
+
+                <StudentDrawerForm
+                    showDrawer={showDrawer}
+                    setShowDrawer={setShowDrawer}
+                    fetchStudents={fetchStudents}
+                />
+                <Empty/>;
+            </>
+
+
         }
         return <>
 

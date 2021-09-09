@@ -29,3 +29,9 @@ export const deleteStudents = id =>
         method: "DELETE"
 
     }).then(checkStatus)
+
+export const editStudents = id =>
+    fetch(`api/v1/students/${id}`,{
+        method: "PUT"
+
+    }).then(checkStatus)

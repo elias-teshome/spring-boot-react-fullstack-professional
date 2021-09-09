@@ -19,7 +19,7 @@ public class StudentController {
   @GetMapping
     public List<Student> getAllStudent()
     {
-
+      //throw new IllegalStateException("oops error");
       return studentServices.getAllStudents();
 
     }
